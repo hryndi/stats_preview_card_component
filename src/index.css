@@ -3,6 +3,7 @@
   --fw-main: 400;
   --ff-regular: "Inter", sans-serif;
   --fs-standart: 15px;
+  --clr-natural-transparent-white-headings: hsl(0, 0%, 100%);
 }
 
 *,
@@ -17,7 +18,7 @@
 
 html,
 body {
-  min-height: 100%;
+  height: 100%;
 }
 
 body {
@@ -26,6 +27,11 @@ body {
   font-size: var(--fs-standart);
   font-family: "Lexend Deca", var(--ff-regular);
   font-weight: var(--fw-main);
+  background-color: var(--clr-primary);
+
+  display: grid;
+  place-content: center;
+  padding-inline: 1rem;
 }
 
 img,
@@ -52,6 +58,12 @@ h4,
 h5,
 h6 {
   overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--clr-natural-transparent-white-headings);
 }
 
 #root {
