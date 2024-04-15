@@ -8,6 +8,9 @@ type TextWidth = {
 type FontWeight = {
   weightSecondary?: boolean;
 };
+type FontAlignLeft = {
+  deskLeft?: boolean;
+};
 
 const Root = styled.div`
   --clr-primary-dark-blue: hsl(244, 38%, 16%);
@@ -17,31 +20,60 @@ const Root = styled.div`
   --ff-secondary: "Inter", sans-serif;
 `;
 
-const Article = styled("article")({
-  backgroundColor: "var(--clr-primary-dark-blue)",
-});
-const ContentWrapper = styled("article")({
-  padding: "2rem",
-  display: "grid",
-  gap: "1.5rem",
-});
+const Article = styled.article`
+  background-color: var(--clr-primary-dark-blue);
+  border-radius: 0.6rem;
+  overflow: hidden;
+  display: grid;
+
+  @media (min-width: 600px) {
+    grid-template-columns: minmax(250px, 540px) minmax(320px, auto);
+    max-width: 1100px;
+    direction: rtl;
+  }
+`;
+const ContentWrapper = styled.article`
+  padding: 2.2rem;
+  display: grid;
+  gap: 1.5rem;
+  direction: ltr;
+  @media (min-width: 600px) {
+    padding: 2.5rem;
+  }
+  @media (min-width: 900px) {
+    padding: 4rem;
+  }
+`;
+
 const HeroImg = styled.img`
   background: var(--clr-secondary-violet);
   opacity: 0.4;
+  display: block;
+  max-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
 `;
-const Header = styled.h1<TextWidth & FontWeight>`
-  font-size: ${(props) => (props.secondary ? `1rem` : `1.6rem`)};
+const Header = styled.h1<TextWidth & FontWeight & FontAlignLeft>`
+  font-size: ${(props) => (props.secondary ? `1.35rem` : `2.2rem`)};
   font-weight: ${(props) => (props.weightSecondary ? 500 : 700)};
   text-align: center;
+
+  @media (min-width: 600px) {
+    text-align: ${(props) => (props.deskLeft ? `left` : `center`)};
+  }
 `;
 const HeaderSpan = styled.span`
   color: var(--clr-secondary-violet);
 `;
-const MainParagraph = styled.p`
+const MainParagraph = styled.p<FontAlignLeft>`
   text-align: center;
   color: var(--clr-natural-transparent-white-paragraph);
-  font-weight: 400;
-  /* font-family: "var(--ff-secondary)"; */
+  font-weight: 300;
+  @media (min-width: 600px) {
+    text-align: ${(props) => (props.deskLeft ? `left` : `center`)};
+    font-size: 1rem;
+    max-width: 90%;
+  }
 `;
 const FlexGroup = styled.div``;
 const Ul = styled.ul`
@@ -51,6 +83,17 @@ const Ul = styled.ul`
   list-style-type: none;
   padding: 0;
   text-align: center;
+
+  @media (min-width: 600px) {
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: start;
+    min-width: 100%;
+    /* margin-top: 1.8rem; */
+    gap: 1rem;
+  }
+  @media (min-width: 700px) {
+    margin-top: 2.5rem;
+  }
 `;
 const Li = styled.li``;
 const LiParagraph = styled.div`
@@ -64,29 +107,35 @@ function App() {
     <Root>
       <Article>
         <picture style={{ backgroundColor: "hsl(277, 64%, 61%)" }}>
-          <source srcSet="" media="(min-width:600px)" />
+          <source srcSet={heroImgDesktop} media="(min-width:600px)" />
           <HeroImg src={heroImg} />
         </picture>
         <ContentWrapper>
-          <Header>
+          <Header deskLeft>
             Get <HeaderSpan>insights</HeaderSpan> that help your business grow.
           </Header>
-          <MainParagraph>
-            Discover the benefits of data analytics and make better decisions
-            regarding revenue, custumer experience, and overall efficiency.
+          <MainParagraph deskLeft>
+            Discover the benefits of data analytics and make better decisions regarding revenue, custumer experience,
+            and overall efficiency.
           </MainParagraph>
           <FlexGroup>
             <Ul>
               <Li>
-                <Header weightSecondary>10k+</Header>
+                <Header secondary weightSecondary>
+                  10k+
+                </Header>
                 <LiParagraph>Companies</LiParagraph>
               </Li>
               <Li>
-                <Header weightSecondary>314</Header>
+                <Header secondary weightSecondary>
+                  314
+                </Header>
                 <LiParagraph>Templates</LiParagraph>
               </Li>
               <Li>
-                <Header weightSecondary>12M+</Header>
+                <Header secondary weightSecondary>
+                  12M+
+                </Header>
                 <LiParagraph>Queries</LiParagraph>
               </Li>
             </Ul>

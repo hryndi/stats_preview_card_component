@@ -18,7 +18,7 @@
 
 html,
 body {
-  height: 100%;
+  min-height: 100vh;
 }
 
 body {
@@ -28,10 +28,11 @@ body {
   font-family: "Lexend Deca", var(--ff-regular);
   font-weight: var(--fw-main);
   background-color: var(--clr-primary);
-
   display: grid;
-  place-content: center;
+  align-content: center;
   padding-inline: 1rem;
+  padding-block: 5rem;
+  place-items: center;
 }
 
 img,
